@@ -4,20 +4,9 @@ import Image from "next/image";
 export default function Header({ title, subtitle, totalProducts}) {
     return (
         <div className={styles.container}>
-            <div className={styles.logo}>
-                <Image
-                    src="/foto.jpg"
-                    alt="Logo da loja"
-                    width={400}
-                    height={300}
-                    priority
-                />
-            </div>
-
-            <div className={styles.content}>
-                <h1>{title}</h1>
-                <p>{subtitle}</p>
-            </div>
+                <h1 className={styles.title}>{title}</h1>
+                <p className={styles.subtitle}>{subtitle}</p>
+                <p className={styles.subtitle}>Total de produtos: {totalProducts}</p>
         </div>
     );
 }

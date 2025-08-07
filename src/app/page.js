@@ -1,25 +1,37 @@
-"use client";
-import React, { useState } from "react";
-import CardAlbuns from "./Card";
+'use client';
 
-export default function Page() {
-  const [albuns, setAlbuns] = useState ([
-    {nome: 'Music Of The Spheares', descricao: 'new album out now', ano: 2022},
-    {nome: 'El Comienzo', descricao: 'new album out now', ano: 2023},
-    {},
-  ])
+import { useState, useEffect } from 'react';
+import Header from '../../components/Header/Header';
+import ProductCard from '../../components/ProductCard/ProductCard';
+import { productsData } from '../../data/products';
+
+export default function Home() {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setProducts(productsData);
+    }, 500);
+  }, []);
+
   return (
     <div>
-        {albuns.map((album, index) => (
+      <Header
+        title="Loja de Eletrônicos"
+        subtitle="Tecnologia de qualidade com preço justo"
+        totalProducts={products.length}
+      />
 
-        <CardAlbuns
-        key={index}
-        nome={album.nome}
-        descricao={album.descricao}
-        ano={album.ano}
-        />
-
+      <div className="products" style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+        gap: '20px',
+        padding: '0 20px'
+      }}>
+        {products.map(product => (
+          <ProductCard key={product.id} product={product} />
         ))}
+      </div>
     </div>
   );
 }
